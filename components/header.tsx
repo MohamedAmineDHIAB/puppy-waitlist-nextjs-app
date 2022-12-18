@@ -30,7 +30,7 @@ export const NavBarItem = styled.div`
     &:after {
         width: 0;
         background: black;
-        height: 1px;
+        height: 2px;
         content: "";
         position: absolute;
         bottom: -5px;
@@ -40,7 +40,7 @@ export const NavBarItem = styled.div`
         &:after {
             width: 100%;
             background: var(--brown-main);
-            height: 1px;
+            height: 2px;
             content: "";
             position: absolute;
         }
