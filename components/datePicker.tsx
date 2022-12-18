@@ -15,7 +15,7 @@ const DatePicker = ({ value, handleChange }: DateProps) => {
             <Stack spacing={3}>
                 <DesktopDatePicker
                     label="By Date"
-                    inputFormat="MM/DD/YYYY"
+                    inputFormat="DD/MM/YYYY"
                     value={value}
                     onChange={handleChange}
                     renderInput={(params) => (

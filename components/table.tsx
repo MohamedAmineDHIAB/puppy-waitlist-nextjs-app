@@ -11,6 +11,7 @@ import Filter from "./filter";
 import { useState } from "react";
 import DatePicker from "./datePicker";
 import dayjs, { Dayjs } from "dayjs";
+import Search from "./search";
 
 const TableWrapper = styled.div`
     width: 90%;
@@ -18,11 +19,10 @@ const TableWrapper = styled.div`
     border-radius: 10px;
     overflow: hidden;
     box-sizing: border-box;
-    padding: 20px 0;
+    padding: 20px;
     box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
 `;
 const TabelBar = styled.div`
-    width: 100%;
     display: flex;
     justify-content: flex-start;
     gap: 20px;
@@ -46,13 +46,18 @@ const Table = () => {
         setDateValue(newValue);
     };
     const [FilterValue, setFilterValue] = useState<string>("all");
+    const [SearchValue, setSearchValue] = useState<string>("");
     return (
         <TableWrapper>
             <TabelBar>
-                <Filter FilterValue={FilterValue} setFilterValue={setFilterValue} />
+                <Filter
+                    FilterValue={FilterValue}
+                    setFilterValue={setFilterValue}
+                />
                 <DatePicker value={DateValue} handleChange={handleDateChange} />
+                <Search value={SearchValue} handleChange={setSearchValue} />
             </TabelBar>
-            <MuiTable>
+            <MuiTable sx={{ borderRadius: "10px", overflow: "hidden" }}>
                 <TableHead>
                     <TableRow>
                         {Columns.map((column, index) => {
@@ -84,7 +89,9 @@ const Table = () => {
                                     <PendingActionsIcon color="error" />
                                 )}
                             </StyledTableCell>
-                            <StyledTableCell>{item.arrival}</StyledTableCell>
+                            <StyledTableCell>
+                                {dayjs(item.arrival).format('DD/MM/YYYY')}
+                            </StyledTableCell>
                         </StyledTableRow>
                     ))}
                 </TableBody>
