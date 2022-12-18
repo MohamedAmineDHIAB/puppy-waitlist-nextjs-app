@@ -10,9 +10,10 @@ import Stack from "@mui/material/Stack";
 import FilterAltRoundedIcon from "@mui/icons-material/FilterAltRounded";
 
 type Props = {
+    FilterValue: string;
     setFilterValue: (filter: string) => void;
 };
-export default function Filter({ setFilterValue }: Props) {
+export default function Filter({ FilterValue, setFilterValue }: Props) {
     const [open, setOpen] = React.useState(false);
     const anchorRef = React.useRef<HTMLButtonElement>(null);
     const handleMenuItemClick = (value: string) => {
@@ -38,6 +39,14 @@ export default function Filter({ setFilterValue }: Props) {
         { value: "serviced", label: "Serviced" },
         { value: "notServiced", label: "Not Serviced" },
     ];
+
+    // check background color based on filter value
+    const handleBackgroundColor = (value: string) => {
+        if (FilterValue === value) {
+            return { backgroundColor: "#f5f5f5" };
+        }
+    };
+
     return (
         <Stack direction="row" spacing={2}>
             <div>
@@ -86,6 +95,12 @@ export default function Filter({ setFilterValue }: Props) {
                                                     handleMenuItemClick(
                                                         filter.value
                                                     );
+                                                }}
+                                                sx={{
+                                                    backgroundColor:
+                                                        handleBackgroundColor(
+                                                            filter.value
+                                                        ),
                                                 }}
                                             >
                                                 {filter.label}

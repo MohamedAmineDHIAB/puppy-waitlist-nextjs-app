@@ -49,7 +49,7 @@ const Table = () => {
     return (
         <TableWrapper>
             <TabelBar>
-                <Filter setFilterValue={setFilterValue} />
+                <Filter FilterValue={FilterValue} setFilterValue={setFilterValue} />
                 <DatePicker value={DateValue} handleChange={handleDateChange} />
             </TabelBar>
             <MuiTable>
