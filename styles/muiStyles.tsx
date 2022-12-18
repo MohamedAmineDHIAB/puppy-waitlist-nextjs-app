@@ -8,9 +8,7 @@ export const StyledTableCell = styled(TableCell)(({ theme }) => ({
         color: theme.palette.grey[700],
         fontSize: 10,
     },
-    [`&.${tableCellClasses.body}`]: {
-        fontSize: 12,
-    },
+    [`&.${tableCellClasses.body}`]: {},
 }));
 
 export const StyledTableRow = styled(TableRow)(({ theme }) => ({
@@ -19,8 +17,21 @@ export const StyledTableRow = styled(TableRow)(({ theme }) => ({
     },
 }));
 export const theme = createTheme({
+    components: {
+        // Name of the component
+        MuiButton: {
+            styleOverrides: {
+                // Name of the slot
+                root: {
+                    // Some CSS
+                    fontSize: "1rem",
+                },
+            },
+        },
+    },
     typography: {
         fontFamily: "Martian Mono",
+        fontSize: 12,
     },
     palette: {
         primary: {
