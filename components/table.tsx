@@ -49,9 +49,9 @@ const Table = () => {
     const [SearchValue, setSearchValue] = useState<string>("");
     const [data, setData] = useState<any>();
     useEffect(() => {
-        const Res = get();
+        const Res = get(FilterValue, SearchValue, DateValue);
         setData(Res);
-    }, []);
+    }, [FilterValue, SearchValue, DateValue]);
 
     return (
         <TableWrapper>
@@ -80,35 +80,37 @@ const Table = () => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {data?.entries.map((item: any) => (
-                        <StyledTableRow key={item.id}>
-                            <StyledTableCell component="th" scope="row">
-                                {item.puppyName}
-                            </StyledTableCell>
-                            <StyledTableCell>{item.owner}</StyledTableCell>
-                            <StyledTableCell>
-                                {item.requestedService}
-                            </StyledTableCell>
-                            <StyledTableCell align="center">
-                                {item.serviced ? (
-                                    <CheckCircleIcon color="success" />
-                                ) : (
-                                    <PendingActionsIcon color="error" />
-                                )}
-                            </StyledTableCell>
-                            <StyledTableCell>
-                                {dayjs(item.arrival).format("DD/MM/YYYY")}
-                            </StyledTableCell>
-                            <StyledTableCell>
-                                <Button
-                                    sx={{ fontSize: "0.7rem" }}
-                                    variant="contained"
-                                >
-                                    Mark as Serviced
-                                </Button>
-                            </StyledTableCell>
-                        </StyledTableRow>
-                    ))}
+                    {data?.map((document: any) => {
+                        return document.entries.map((item: any) => (
+                            <StyledTableRow key={item.id}>
+                                <StyledTableCell component="th" scope="row">
+                                    {item.puppyName}
+                                </StyledTableCell>
+                                <StyledTableCell>{item.owner}</StyledTableCell>
+                                <StyledTableCell>
+                                    {item.requestedService}
+                                </StyledTableCell>
+                                <StyledTableCell align="center">
+                                    {item.serviced ? (
+                                        <CheckCircleIcon color="success" />
+                                    ) : (
+                                        <PendingActionsIcon color="error" />
+                                    )}
+                                </StyledTableCell>
+                                <StyledTableCell>
+                                    {dayjs(item.arrival).format("YYYY-MM-DD")}
+                                </StyledTableCell>
+                                <StyledTableCell>
+                                    <Button
+                                        sx={{ fontSize: "0.7rem" }}
+                                        variant="contained"
+                                    >
+                                        Mark as Serviced
+                                    </Button>
+                                </StyledTableCell>
+                            </StyledTableRow>
+                        ));
+                    })}
                 </TableBody>
             </MuiTable>
         </TableWrapper>
