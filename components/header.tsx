@@ -39,12 +39,12 @@ export const NavBarItem = styled.div`
     &:hover {
         &:after {
             width: 100%;
-            background: var(--brown-main);
+            background: var(--purple-main);
             height: 2px;
             content: "";
             position: absolute;
         }
-        color: var(--brown-main);
+        color: var(--purple-main);
     }
     @media screen and (max-width: 768px) {
         display: none;

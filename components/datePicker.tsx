@@ -12,7 +12,7 @@ type DateProps = {
 const DatePicker = ({ value, handleChange }: DateProps) => {
     return (
         <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <Stack spacing={3}>
+            <Stack sx={{ width: 170 }}>
                 <DesktopDatePicker
                     label="By Date"
                     inputFormat="DD/MM/YYYY"

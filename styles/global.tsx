@@ -4,11 +4,10 @@ export const GlobalStyle = createGlobalStyle`
     * {
         font-family: 'Martian Mono', monospace;
         font-size:1rem;
-        --brown-main:#EE9E69;
+        --purple-main:#6251ED;
         user-select: none;
-    }
-    h1{
-        font-size:1.1rem;
+        font-weight:300;
+
     }
 `;
 

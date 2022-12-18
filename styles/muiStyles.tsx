@@ -8,7 +8,11 @@ export const StyledTableCell = styled(TableCell)(({ theme }) => ({
         color: theme.palette.grey[700],
         fontSize: 10,
     },
-    [`&.${tableCellClasses.body}`]: {},
+    [`&.${tableCellClasses.body}`]: {
+        "&:last-child": {
+            width: "min-content",
+        },
+    },
 }));
 
 export const StyledTableRow = styled(TableRow)(({ theme }) => ({
@@ -28,6 +32,7 @@ export const theme = createTheme({
                     "&.Mui-selected": {
                         backgroundColor: "black",
                     },
+                    textTransform: "none",
                 },
             },
         },
@@ -38,9 +43,9 @@ export const theme = createTheme({
     },
     palette: {
         primary: {
-            main: "#EE9E69",
-            light: "#F4CEB5",
-            dark: "#EE9E69",
+            main: "#6251ED",
+            light: "#8CB7FA",
+            dark: "#793ED6",
         },
         secondary: {
             main: "#6251ED",

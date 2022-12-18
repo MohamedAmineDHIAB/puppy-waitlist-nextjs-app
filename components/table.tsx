@@ -4,15 +4,15 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { StyledTableCell, StyledTableRow } from "../styles/muiStyles";
 import styled from "styled-components";
-import FakeData from "../data/fakeData";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import PendingActionsIcon from "@mui/icons-material/PendingActions";
 import Filter from "./filter";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import DatePicker from "./datePicker";
 import dayjs, { Dayjs } from "dayjs";
 import Search from "./search";
-
+import { Button } from "@mui/material";
+import get from "../middleware/get";
 const TableWrapper = styled.div`
     width: 90%;
     background-color: white;
@@ -41,12 +41,18 @@ const Columns = [
     { name: "Arrival", align: "left" },
 ];
 const Table = () => {
-    const [DateValue, setDateValue] = useState<Dayjs | null>(dayjs(new Date()));
+    const [DateValue, setDateValue] = useState<Dayjs | null>(null);
     const handleDateChange = (newValue: Dayjs | null) => {
         setDateValue(newValue);
     };
     const [FilterValue, setFilterValue] = useState<string>("all");
     const [SearchValue, setSearchValue] = useState<string>("");
+    const [data, setData] = useState<any>();
+    useEffect(() => {
+        const Res = get();
+        setData(Res);
+    }, []);
+
     return (
         <TableWrapper>
             <TabelBar>
@@ -70,10 +76,11 @@ const Table = () => {
                                 </StyledTableCell>
                             );
                         })}
+                        <StyledTableCell></StyledTableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {FakeData?.entries.map((item) => (
+                    {data?.entries.map((item: any) => (
                         <StyledTableRow key={item.id}>
                             <StyledTableCell component="th" scope="row">
                                 {item.puppyName}
@@ -90,7 +97,15 @@ const Table = () => {
                                 )}
                             </StyledTableCell>
                             <StyledTableCell>
-                                {dayjs(item.arrival).format('DD/MM/YYYY')}
+                                {dayjs(item.arrival).format("DD/MM/YYYY")}
+                            </StyledTableCell>
+                            <StyledTableCell>
+                                <Button
+                                    sx={{ fontSize: "0.7rem" }}
+                                    variant="contained"
+                                >
+                                    Mark as Serviced
+                                </Button>
                             </StyledTableCell>
                         </StyledTableRow>
                     ))}

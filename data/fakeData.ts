@@ -1,4 +1,4 @@
-const FakeData = {
+let FakeData = {
     date: "2022-12-05",
     entries: [
         {
