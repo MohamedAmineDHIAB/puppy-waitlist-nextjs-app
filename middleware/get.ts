@@ -1,25 +1,14 @@
-import FakeData from "../data/fakeData";
 import { Dayjs } from "dayjs";
 
-const ConcatEntries = (data: any) => {
-    let entries: any[];
-    entries = [];
-    data.forEach((item: any) => {
-        entries = entries.concat(item.entries);
-    });
-    return entries;
-};
 export default function get(
     FilterValue: string,
     SearchValue: string,
-    DateValue: Dayjs | null
+    DateValue: Dayjs | null,
+    Data: any[]
 ) {
     let copyFakeData: any[];
     const date = DateValue?.format("YYYY-MM-DD");
-    copyFakeData = date
-        ? FakeData.filter((item) => item.date === date)
-        : FakeData;
-    console.log(copyFakeData);
+    copyFakeData = date ? Data.filter((item) => item.date === date) : Data;
     copyFakeData = copyFakeData.map((item: any) => {
         let entries: any[];
         entries = item.entries;
@@ -30,12 +19,13 @@ export default function get(
         }
         if (SearchValue !== "") {
             entries = entries.filter((entry: any) =>
-                entry.owner.toLowerCase().includes(SearchValue.toLowerCase())
+                (entry.owner + entry.puppyName + entry.requestedService)
+                    .toLowerCase()
+                    .includes(SearchValue.toLowerCase())
             );
         }
         return { ...item, entries };
     });
-    console.log(copyFakeData);
 
     return copyFakeData;
 }

@@ -54,9 +54,11 @@ export const theme = createTheme({
         },
         error: {
             main: "#F07775",
+            dark: "#F07775",
         },
         success: {
             main: "#A3D9C5",
+            dark: "#64DFB2",
         },
     },
 });

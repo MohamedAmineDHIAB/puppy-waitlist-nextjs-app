@@ -11,8 +11,13 @@ import { useEffect, useState } from "react";
 import DatePicker from "./datePicker";
 import dayjs, { Dayjs } from "dayjs";
 import Search from "./search";
-import { Button } from "@mui/material";
+import { Button, IconButton } from "@mui/material";
 import get from "../middleware/get";
+import put from "../middleware/put";
+import FakeData from "../data/fakeData";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import HighlightOffIcon from "@mui/icons-material/HighlightOff";
+import UndoRoundedIcon from "@mui/icons-material/UndoRounded";
 const TableWrapper = styled.div`
     width: 90%;
     background-color: white;
@@ -48,73 +53,126 @@ const Table = () => {
     const [FilterValue, setFilterValue] = useState<string>("all");
     const [SearchValue, setSearchValue] = useState<string>("");
     const [data, setData] = useState<any>();
+    const handleGet = (
+        FilterValue: string,
+        SearchValue: string,
+        DateValue: Dayjs | null,
+        Data: any[]
+    ) => {
+        const Res = get(FilterValue, SearchValue, DateValue, Data);
+        setData([...Res]);
+    };
+    const handlePut = (item: any) => {
+        const Res = put(item.id, item.arrival, !item.serviced, data);
+        setData([...Res]);
+    };
     useEffect(() => {
-        const Res = get(FilterValue, SearchValue, DateValue);
-        setData(Res);
-    }, [FilterValue, SearchValue, DateValue]);
-
-    return (
-        <TableWrapper>
-            <TabelBar>
-                <Filter
-                    FilterValue={FilterValue}
-                    setFilterValue={setFilterValue}
-                />
-                <DatePicker value={DateValue} handleChange={handleDateChange} />
-                <Search value={SearchValue} handleChange={setSearchValue} />
-            </TabelBar>
-            <MuiTable sx={{ borderRadius: "10px", overflow: "hidden" }}>
-                <TableHead>
-                    <TableRow>
-                        {Columns.map((column, index) => {
-                            return (
-                                <StyledTableCell
-                                    key={index}
-                                    align={column.align as align}
-                                >
-                                    {column.name}
-                                </StyledTableCell>
-                            );
-                        })}
-                        <StyledTableCell></StyledTableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {data?.map((document: any) => {
-                        return document.entries.map((item: any) => (
-                            <StyledTableRow key={item.id}>
-                                <StyledTableCell component="th" scope="row">
-                                    {item.puppyName}
-                                </StyledTableCell>
-                                <StyledTableCell>{item.owner}</StyledTableCell>
-                                <StyledTableCell>
-                                    {item.requestedService}
-                                </StyledTableCell>
-                                <StyledTableCell align="center">
-                                    {item.serviced ? (
-                                        <CheckCircleIcon color="success" />
-                                    ) : (
-                                        <PendingActionsIcon color="error" />
-                                    )}
-                                </StyledTableCell>
-                                <StyledTableCell>
-                                    {dayjs(item.arrival).format("YYYY-MM-DD")}
-                                </StyledTableCell>
-                                <StyledTableCell>
-                                    <Button
-                                        sx={{ fontSize: "0.7rem" }}
-                                        variant="contained"
+        handleGet(FilterValue, SearchValue, DateValue, FakeData);
+    }, [FilterValue, SearchValue, DateValue, FakeData]);
+    if (!data) return <div>Loading...</div>;
+    else {
+        console.log(data[0].entries[0].serviced);
+        return (
+            <TableWrapper>
+                <TabelBar>
+                    <Filter
+                        FilterValue={FilterValue}
+                        setFilterValue={setFilterValue}
+                    />
+                    <DatePicker
+                        value={DateValue}
+                        handleChange={handleDateChange}
+                    />
+                    <Search value={SearchValue} handleChange={setSearchValue} />
+                </TabelBar>
+                <MuiTable sx={{ borderRadius: "10px", overflow: "hidden" }}>
+                    <TableHead>
+                        <TableRow>
+                            {Columns.map((column, index) => {
+                                return (
+                                    <StyledTableCell
+                                        key={index}
+                                        align={column.align as align}
                                     >
-                                        Mark as Serviced
-                                    </Button>
-                                </StyledTableCell>
-                            </StyledTableRow>
-                        ));
-                    })}
-                </TableBody>
-            </MuiTable>
-        </TableWrapper>
-    );
+                                        {column.name}
+                                    </StyledTableCell>
+                                );
+                            })}
+                            {/* empty cells to match the header */}
+                            <StyledTableCell></StyledTableCell>
+                            <StyledTableCell></StyledTableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {data?.map((document: any) => {
+                            return document.entries.map((item: any) => (
+                                <StyledTableRow key={item.id}>
+                                    <StyledTableCell component="th" scope="row">
+                                        {item.puppyName}
+                                    </StyledTableCell>
+                                    <StyledTableCell>
+                                        {item.owner}
+                                    </StyledTableCell>
+                                    <StyledTableCell>
+                                        {item.requestedService}
+                                    </StyledTableCell>
+                                    <StyledTableCell align="center">
+                                        {item.serviced ? (
+                                            <CheckCircleIcon color="success" />
+                                        ) : (
+                                            <PendingActionsIcon color="error" />
+                                        )}
+                                    </StyledTableCell>
+                                    <StyledTableCell>
+                                        {dayjs(item.arrival).format(
+                                            "YYYY-MM-DD"
+                                        )}
+                                    </StyledTableCell>
+                                    <StyledTableCell>
+                                        {item.serviced ? (
+                                            <Button
+                                                sx={{
+                                                    fontSize: "0.7rem",
+
+                                                    gap: "5px",
+                                                }}
+                                                variant="contained"
+                                                onClick={() => {
+                                                    handlePut(item);
+                                                }}
+                                                color="info"
+                                            >
+                                                Reopen <UndoRoundedIcon />
+                                            </Button>
+                                        ) : (
+                                            <Button
+                                                sx={{
+                                                    fontSize: "0.7rem",
+                                                    gap: "5px",
+                                                }}
+                                                variant="contained"
+                                                onClick={() => {
+                                                    handlePut(item);
+                                                }}
+                                                color="info"
+                                            >
+                                                Close <HighlightOffIcon />
+                                            </Button>
+                                        )}
+                                    </StyledTableCell>
+                                    <StyledTableCell>
+                                        <IconButton>
+                                            <DeleteForeverIcon color="error" />
+                                        </IconButton>
+                                    </StyledTableCell>
+                                </StyledTableRow>
+                            ));
+                        })}
+                    </TableBody>
+                </MuiTable>
+            </TableWrapper>
+        );
+    }
 };
 
 export default Table;
