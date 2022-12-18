@@ -17,6 +17,7 @@ const TableWrapper = styled.div`
     box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
 `;
 
+type align = "inherit" | "left" | "center" | "right" | "justify";
 const Columns = [
     { name: "Puppy Name", align: "left" },
     { name: "Owner", align: "left" },
@@ -34,7 +35,7 @@ const Table = () => {
                             return (
                                 <StyledTableCell
                                     key={index}
-                                    align={column.align}
+                                    align={column.align as align}
                                 >
                                     {column.name}
                                 </StyledTableCell>
