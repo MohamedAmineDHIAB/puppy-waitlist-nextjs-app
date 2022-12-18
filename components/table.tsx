@@ -9,6 +9,9 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import PendingActionsIcon from "@mui/icons-material/PendingActions";
 import Filter from "./filter";
 import { useState } from "react";
+import DatePicker from "./datePicker";
+import dayjs, { Dayjs } from "dayjs";
+
 const TableWrapper = styled.div`
     width: 90%;
     background-color: white;
@@ -21,10 +24,12 @@ const TableWrapper = styled.div`
 const TabelBar = styled.div`
     width: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
+    gap: 20px;
     align-items: center;
     box-sizing: border-box;
     padding: 20px;
+    position: relative;
 `;
 
 type align = "inherit" | "left" | "center" | "right" | "justify";
@@ -36,12 +41,16 @@ const Columns = [
     { name: "Arrival", align: "left" },
 ];
 const Table = () => {
+    const [DateValue, setDateValue] = useState<Dayjs | null>(dayjs(new Date()));
+    const handleDateChange = (newValue: Dayjs | null) => {
+        setDateValue(newValue);
+    };
     const [FilterValue, setFilterValue] = useState<string>("all");
-    console.log(FilterValue);
     return (
         <TableWrapper>
             <TabelBar>
                 <Filter setFilterValue={setFilterValue} />
+                <DatePicker value={DateValue} handleChange={handleDateChange} />
             </TabelBar>
             <MuiTable>
                 <TableHead>

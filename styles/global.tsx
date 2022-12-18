@@ -8,8 +8,7 @@ export const GlobalStyle = createGlobalStyle`
         user-select: none;
     }
     h1{
-        font-family: 'Itim', cursive;
-        font-size:1.5rem;
+        font-size:1.1rem;
     }
 `;
 

@@ -25,6 +25,9 @@ export const theme = createTheme({
                 root: {
                     // Some CSS
                     fontSize: "1rem",
+                    "&.Mui-selected": {
+                        backgroundColor: "black",
+                    },
                 },
             },
         },
@@ -37,7 +40,7 @@ export const theme = createTheme({
         primary: {
             main: "#EE9E69",
             light: "#F4CEB5",
-            dark: "#D67554",
+            dark: "#EE9E69",
         },
         secondary: {
             main: "#6251ED",
