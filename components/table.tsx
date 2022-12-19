@@ -24,7 +24,7 @@ const TableWrapper = styled.div`
     border-radius: 10px;
     overflow: hidden;
     box-sizing: border-box;
-    padding: 20px;
+    padding: 80px 20px;
     box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
 `;
 const TabelBar = styled.div`

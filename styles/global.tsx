@@ -30,9 +30,13 @@ export const Body = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     min-height: 100vh;
     position: relative;
-    padding: 120px 0;
-    background-color: #f2eae4;
+    padding-top: 200px;
+    background: url("./background.svg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-blend-mode: multiply;
 `;
