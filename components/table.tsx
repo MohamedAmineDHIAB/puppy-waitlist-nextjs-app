@@ -124,7 +124,7 @@ const Table = () => {
                                             "YYYY-MM-DD"
                                         )}
                                     </StyledTableCell>
-                                    <StyledTableCell>
+                                    <StyledTableCell align="center">
                                         <ServiceButton
                                             item={item}
                                             handlePut={handlePut}

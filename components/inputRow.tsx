@@ -8,7 +8,7 @@ import RadioButtonUncheckedOutlinedIcon from "@mui/icons-material/RadioButtonUnc
 import dayjs, { Dayjs } from "dayjs";
 import { v4 as uuidv4 } from "uuid";
 import DateTimePicker from "./dateTimePicker";
-
+import ControlPointOutlinedIcon from "@mui/icons-material/ControlPointOutlined";
 type props = {
     handlePost: (newEntry: any) => void;
 };
@@ -40,7 +40,7 @@ const InputRow = ({ handlePost }: props) => {
                 <TextField
                     id="puppyName"
                     label="Puppy Name"
-                    variant="outlined"
+                    variant="standard"
                     onChange={(event) => {
                         setPuppyName(event.target.value);
                     }}
@@ -50,7 +50,7 @@ const InputRow = ({ handlePost }: props) => {
                 <TextField
                     id="owner"
                     label="Owner"
-                    variant="outlined"
+                    variant="standard"
                     onChange={(event) => {
                         setOwner(event.target.value);
                     }}
@@ -60,7 +60,7 @@ const InputRow = ({ handlePost }: props) => {
                 <TextField
                     id="requestedService"
                     label="Requested Service"
-                    variant="outlined"
+                    variant="standard"
                     onChange={(event) => {
                         setRequestedService(event.target.value);
                     }}
@@ -80,9 +80,9 @@ const InputRow = ({ handlePost }: props) => {
             <StyledTableCell>
                 <DateTimePicker value={arrival} handleChange={setArrival} />
             </StyledTableCell>
-            <StyledTableCell>
+            <StyledTableCell align="center">
                 <Button variant="contained" color="primary" onClick={handleAdd}>
-                    Add
+                    Add <ControlPointOutlinedIcon />
                 </Button>
             </StyledTableCell>
             <StyledTableCell></StyledTableCell>

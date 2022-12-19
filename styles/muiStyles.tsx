@@ -28,7 +28,8 @@ export const theme = createTheme({
                 // Name of the slot
                 root: {
                     // Some CSS
-                    fontSize: "1rem",
+                    fontSize: 14,
+                    gap: "5px",
                     "&.Mui-selected": {
                         backgroundColor: "black",
                     },
@@ -44,13 +45,13 @@ export const theme = createTheme({
     palette: {
         primary: {
             main: "#6251ED",
-            light: "#8CB7FA",
-            dark: "#793ED6",
+            light: "#A49AF0",
+            dark: "#4E3FBA",
         },
         secondary: {
             main: "#6251ED",
-            light: "#8CB7FA",
-            dark: "#793ED6",
+            light: "#A49AF0",
+            dark: "#4E3FBA",
         },
         error: {
             main: "#F07775",

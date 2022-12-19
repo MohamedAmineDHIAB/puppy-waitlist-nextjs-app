@@ -17,7 +17,9 @@ const DateTimePicker = ({ value, handleChange }: DateProps) => {
                     label="Arrival"
                     value={value}
                     onChange={handleChange}
-                    renderInput={(params) => <TextField {...params} />}
+                    renderInput={(params) => (
+                        <TextField variant="standard" {...params} />
+                    )}
                 />
             </Stack>
         </LocalizationProvider>

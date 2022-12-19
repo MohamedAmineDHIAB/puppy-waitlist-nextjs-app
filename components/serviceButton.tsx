@@ -9,11 +9,6 @@ const ServiceButton = ({ item, handlePut }: props) => {
     if (item.serviced) {
         return (
             <Button
-                sx={{
-                    fontSize: "0.7rem",
-
-                    gap: "5px",
-                }}
                 variant="contained"
                 onClick={() => {
                     handlePut(item);
