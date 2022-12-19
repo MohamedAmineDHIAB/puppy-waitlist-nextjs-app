@@ -48,7 +48,7 @@ export default function Filter({ FilterValue, setFilterValue }: Props) {
     };
 
     return (
-        <Stack direction="row" spacing={2}>
+        <Stack direction="row" spacing={2} style={{ zIndex: "100" }}>
             <div>
                 <IconButton
                     ref={anchorRef}
