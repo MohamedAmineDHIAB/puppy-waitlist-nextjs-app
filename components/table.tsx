@@ -16,6 +16,7 @@ import ServiceButton from "./serviceButton";
 import ServiceIcon from "./serviceIcon";
 import delete_ from "../middleware/delete";
 import DeleteButton from "./deleteButton";
+import post from "../middleware/post";
 const TableWrapper = styled.div`
     width: 90%;
     background-color: white;
@@ -59,6 +60,10 @@ const Table = () => {
     };
     const handleDelete = (item: any) => {
         const Res = delete_(item.id, item.arrival, data);
+        setData([...Res]);
+    };
+    const handlePost = (item: any) => {
+        const Res = post(item, data);
         setData([...Res]);
     };
     useEffect(() => {

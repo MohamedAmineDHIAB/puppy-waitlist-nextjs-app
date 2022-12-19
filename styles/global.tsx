@@ -5,6 +5,7 @@ export const GlobalStyle = createGlobalStyle`
         font-family:'Noto Sans Display', sans-serif;
         font-size:1.1rem;
         --purple-main:#6251ED;
+        --brown-main:#85392b;
         user-select: none;
     }
     h1 {

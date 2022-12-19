@@ -27,9 +27,10 @@ export const NavBarItem = styled.div`
     align-items: center;
     position: relative;
     cursor: pointer;
+    color: var(--brown-main);
     &:after {
         width: 0;
-        background: black;
+        background: var(--brown-main);
         height: 2px;
         content: "";
         position: absolute;
