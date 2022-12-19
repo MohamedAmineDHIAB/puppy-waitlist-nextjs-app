@@ -29,7 +29,7 @@ const InputRow = ({ handlePost }: props) => {
             owner: owner,
             requestedService: requestedService,
             serviced: serviced,
-            arrival: arrival?.format("YYYY-MM-DDTHH:mm:ssZ"),
+            arrival: arrival?.format("YYYY-MM-DDTHH:mm:ss[Z]"),
         };
         // call handlePost function to add new entry to table
         handlePost(newEntry);
