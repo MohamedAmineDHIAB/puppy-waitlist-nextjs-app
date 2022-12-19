@@ -36,8 +36,8 @@ export const Body = styled.div`
     min-height: calc(100vh - 150px);
     padding-bottom: 50px;
     background: url("./background.svg");
-    background-size: cover;
+    background-size: contain;
     background-position: center;
-    background-repeat: no-repeat;
+    background-repeat: repeat;
     background-blend-mode: normal;
 `;
