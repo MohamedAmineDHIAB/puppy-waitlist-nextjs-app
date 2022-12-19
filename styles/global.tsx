@@ -6,7 +6,11 @@ export const GlobalStyle = createGlobalStyle`
         font-size:1.1rem;
         --purple-main:#6251ED;
         user-select: none;
-        font-weight:800;
+    }
+    h1 {
+        font-weight:400;
+        letter-spacing: 0.05rem;
+        font-family:'Fredoka One', cursive;
     }
 `;
 
