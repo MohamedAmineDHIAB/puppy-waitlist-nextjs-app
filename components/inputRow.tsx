@@ -85,11 +85,7 @@ const InputRow = ({ handlePost }: props) => {
                 />
             </StyledTableCell>
             <StyledTableCell>
-                <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={handlePost}
-                >
+                <Button variant="contained" color="primary" onClick={handleAdd}>
                     Add
                 </Button>
             </StyledTableCell>
