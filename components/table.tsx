@@ -9,14 +9,13 @@ import { useEffect, useState } from "react";
 import DatePicker from "./datePicker";
 import dayjs, { Dayjs } from "dayjs";
 import Search from "./search";
-import { IconButton } from "@mui/material";
 import get from "../middleware/get";
 import put from "../middleware/put";
 import FakeData, { Columns, align } from "../data/fakeData";
-import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import ServiceButton from "./serviceButton";
 import ServiceIcon from "./serviceIcon";
 import delete_ from "../middleware/delete";
+import DeleteButton from "./deleteButton";
 const TableWrapper = styled.div`
     width: 90%;
     background-color: white;
@@ -43,7 +42,8 @@ const Table = () => {
     };
     const [FilterValue, setFilterValue] = useState<string>("all");
     const [SearchValue, setSearchValue] = useState<string>("");
-    const [data, setData] = useState<any>();
+    const [data, setData] = useState<any>(FakeData);
+    const [shownData, setShownData] = useState<any>([]);
     const handleGet = (
         FilterValue: string,
         SearchValue: string,
@@ -51,7 +51,7 @@ const Table = () => {
         Data: any[]
     ) => {
         const Res = get(FilterValue, SearchValue, DateValue, Data);
-        setData([...Res]);
+        setShownData([...Res]);
     };
     const handlePut = (item: any) => {
         const Res = put(item.id, item.arrival, !item.serviced, data);
@@ -62,8 +62,8 @@ const Table = () => {
         setData([...Res]);
     };
     useEffect(() => {
-        handleGet(FilterValue, SearchValue, DateValue, FakeData);
-    }, [FilterValue, SearchValue, DateValue, FakeData]);
+        handleGet(FilterValue, SearchValue, DateValue, data);
+    }, [FilterValue, SearchValue, DateValue, data]);
     if (!data) return <TableWrapper>Loading...</TableWrapper>;
     else {
         return (
@@ -98,7 +98,7 @@ const Table = () => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {data?.map((document: any) => {
+                        {shownData?.map((document: any) => {
                             return document.entries.map((item: any) => (
                                 <StyledTableRow key={item.id}>
                                     <StyledTableCell component="th" scope="row">
@@ -125,9 +125,10 @@ const Table = () => {
                                         />
                                     </StyledTableCell>
                                     <StyledTableCell>
-                                        <IconButton onClick={handleDelete}>
-                                            <DeleteForeverIcon color="error" />
-                                        </IconButton>
+                                        <DeleteButton
+                                            item={item}
+                                            handleDelete={handleDelete}
+                                        />
                                     </StyledTableCell>
                                 </StyledTableRow>
                             ));

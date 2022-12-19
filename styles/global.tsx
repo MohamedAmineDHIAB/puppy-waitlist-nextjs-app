@@ -2,12 +2,11 @@ import styled, { createGlobalStyle } from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
     * {
-        font-family: 'Martian Mono', monospace;
-        font-size:1rem;
+        font-family:'Noto Sans Display', sans-serif;
+        font-size:1.1rem;
         --purple-main:#6251ED;
         user-select: none;
-        font-weight:300;
-
+        font-weight:800;
     }
 `;
 

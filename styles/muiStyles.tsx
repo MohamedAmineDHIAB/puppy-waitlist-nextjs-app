@@ -6,7 +6,7 @@ export const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
         backgroundColor: theme.palette.grey[300],
         color: theme.palette.grey[700],
-        fontSize: 10,
+        fontSize: 12,
     },
     [`&.${tableCellClasses.body}`]: {
         "&:last-child": {
@@ -38,8 +38,8 @@ export const theme = createTheme({
         },
     },
     typography: {
-        fontFamily: "Martian Mono",
-        fontSize: 12,
+        fontFamily: "Noto Sans Display",
+        fontSize: 14,
     },
     palette: {
         primary: {
