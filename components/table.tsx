@@ -4,20 +4,19 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { StyledTableCell, StyledTableRow } from "../styles/muiStyles";
 import styled from "styled-components";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import PendingActionsIcon from "@mui/icons-material/PendingActions";
 import Filter from "./filter";
 import { useEffect, useState } from "react";
 import DatePicker from "./datePicker";
 import dayjs, { Dayjs } from "dayjs";
 import Search from "./search";
-import { Button, IconButton } from "@mui/material";
+import { IconButton } from "@mui/material";
 import get from "../middleware/get";
 import put from "../middleware/put";
-import FakeData from "../data/fakeData";
+import FakeData, { Columns, align } from "../data/fakeData";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-import HighlightOffIcon from "@mui/icons-material/HighlightOff";
-import UndoRoundedIcon from "@mui/icons-material/UndoRounded";
+import ServiceButton from "./serviceButton";
+import ServiceIcon from "./serviceIcon";
+import delete_ from "../middleware/delete";
 const TableWrapper = styled.div`
     width: 90%;
     background-color: white;
@@ -37,14 +36,6 @@ const TabelBar = styled.div`
     position: relative;
 `;
 
-type align = "inherit" | "left" | "center" | "right" | "justify";
-const Columns = [
-    { name: "Puppy Name", align: "left" },
-    { name: "Owner", align: "left" },
-    { name: "Requested Service", align: "left" },
-    { name: "Serviced", align: "center" },
-    { name: "Arrival", align: "left" },
-];
 const Table = () => {
     const [DateValue, setDateValue] = useState<Dayjs | null>(null);
     const handleDateChange = (newValue: Dayjs | null) => {
@@ -66,12 +57,15 @@ const Table = () => {
         const Res = put(item.id, item.arrival, !item.serviced, data);
         setData([...Res]);
     };
+    const handleDelete = (item: any) => {
+        const Res = delete_(item.id, item.arrival, data);
+        setData([...Res]);
+    };
     useEffect(() => {
         handleGet(FilterValue, SearchValue, DateValue, FakeData);
     }, [FilterValue, SearchValue, DateValue, FakeData]);
-    if (!data) return <div>Loading...</div>;
+    if (!data) return <TableWrapper>Loading...</TableWrapper>;
     else {
-        console.log(data[0].entries[0].serviced);
         return (
             <TableWrapper>
                 <TabelBar>
@@ -117,11 +111,7 @@ const Table = () => {
                                         {item.requestedService}
                                     </StyledTableCell>
                                     <StyledTableCell align="center">
-                                        {item.serviced ? (
-                                            <CheckCircleIcon color="success" />
-                                        ) : (
-                                            <PendingActionsIcon color="error" />
-                                        )}
+                                        <ServiceIcon serviced={item.serviced} />
                                     </StyledTableCell>
                                     <StyledTableCell>
                                         {dayjs(item.arrival).format(
@@ -129,39 +119,13 @@ const Table = () => {
                                         )}
                                     </StyledTableCell>
                                     <StyledTableCell>
-                                        {item.serviced ? (
-                                            <Button
-                                                sx={{
-                                                    fontSize: "0.7rem",
-
-                                                    gap: "5px",
-                                                }}
-                                                variant="contained"
-                                                onClick={() => {
-                                                    handlePut(item);
-                                                }}
-                                                color="info"
-                                            >
-                                                Reopen <UndoRoundedIcon />
-                                            </Button>
-                                        ) : (
-                                            <Button
-                                                sx={{
-                                                    fontSize: "0.7rem",
-                                                    gap: "5px",
-                                                }}
-                                                variant="contained"
-                                                onClick={() => {
-                                                    handlePut(item);
-                                                }}
-                                                color="info"
-                                            >
-                                                Close <HighlightOffIcon />
-                                            </Button>
-                                        )}
+                                        <ServiceButton
+                                            item={item}
+                                            handlePut={handlePut}
+                                        />
                                     </StyledTableCell>
                                     <StyledTableCell>
-                                        <IconButton>
+                                        <IconButton onClick={handleDelete}>
                                             <DeleteForeverIcon color="error" />
                                         </IconButton>
                                     </StyledTableCell>

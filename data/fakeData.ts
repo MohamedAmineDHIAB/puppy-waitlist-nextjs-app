@@ -1,3 +1,12 @@
+export type align = "inherit" | "left" | "center" | "right" | "justify";
+export const Columns = [
+    { name: "Puppy Name", align: "left" },
+    { name: "Owner", align: "left" },
+    { name: "Requested Service", align: "left" },
+    { name: "Serviced", align: "center" },
+    { name: "Arrival", align: "left" },
+];
+
 let FakeData = [
     {
         date: "2022-12-05",
