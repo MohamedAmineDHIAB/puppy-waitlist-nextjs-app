@@ -15,6 +15,7 @@ const DateTimePicker = ({ value, handleChange }: DateProps) => {
             <Stack sx={{ width: 170 }}>
                 <DateTimePickerMUI
                     label="Arrival"
+                    inputFormat="YYYY-MM-DD HH:mm"
                     value={value}
                     onChange={handleChange}
                     renderInput={(params) => (
