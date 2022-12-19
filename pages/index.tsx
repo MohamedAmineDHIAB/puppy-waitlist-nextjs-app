@@ -5,6 +5,7 @@ import Table from "../components/table";
 import Header from "../components/header";
 import { ThemeProvider } from "@mui/material/styles";
 import { theme } from "../styles/muiStyles";
+import Footer from "../components/footer";
 const Logo = dynamic(() => import("../components/logo"), {
     ssr: false,
 });
@@ -23,12 +24,13 @@ export default function Home() {
             </Head>
             <Main>
                 <ThemeProvider theme={theme}>
+                    <Header />
                     <Body>
                         <GlobalStyle />
                         <Logo />
-                        <Header />
                         <Table />
                     </Body>
+                    <Footer />
                 </ThemeProvider>
             </Main>
         </>

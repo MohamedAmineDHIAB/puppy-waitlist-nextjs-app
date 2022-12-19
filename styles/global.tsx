@@ -9,9 +9,12 @@ export const GlobalStyle = createGlobalStyle`
         user-select: none;
     }
     h1 {
-        font-weight:400;
         letter-spacing: 0.05rem;
         font-family:'Fredoka One', cursive;
+    }
+    span,a {
+        letter-spacing: 0.05rem;
+        font-size : 0.8rem;
     }
 `;
 
