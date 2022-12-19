@@ -17,6 +17,7 @@ import ServiceIcon from "./serviceIcon";
 import delete_ from "../middleware/delete";
 import DeleteButton from "./deleteButton";
 import post from "../middleware/post";
+import InputRow from "./inputRow";
 const TableWrapper = styled.div`
     width: 90%;
     background-color: white;
@@ -138,6 +139,7 @@ const Table = () => {
                                 </StyledTableRow>
                             ));
                         })}
+                        <InputRow handlePost={handlePost} />
                     </TableBody>
                 </MuiTable>
             </TableWrapper>

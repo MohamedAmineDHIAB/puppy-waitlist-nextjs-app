@@ -30,5 +30,6 @@ export const Body = styled.div`
     justify-content: center;
     min-height: 100vh;
     position: relative;
+    padding: 120px 0;
     background-color: #f2eae4;
 `;

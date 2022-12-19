@@ -5,8 +5,9 @@ import { StyledTableCell, StyledTableRow } from "../styles/muiStyles";
 import Checkbox from "@mui/material/Checkbox";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import RadioButtonUncheckedOutlinedIcon from "@mui/icons-material/RadioButtonUncheckedOutlined";
-import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
+import dayjs, { Dayjs } from "dayjs";
 import { v4 as uuidv4 } from "uuid";
+import DateTimePicker from "./dateTimePicker";
 
 type props = {
     handlePost: (newEntry: any) => void;
@@ -16,7 +17,7 @@ const InputRow = ({ handlePost }: props) => {
     const [owner, setOwner] = useState<string>("");
     const [requestedService, setRequestedService] = useState<string>("");
     const [serviced, setServiced] = useState<boolean>(false);
-    const [arrival, setArrival] = useState<Date | null>(new Date());
+    const [arrival, setArrival] = useState<Dayjs | null>(dayjs(new Date()));
 
     const handleAdd = () => {
         // define new ID for new entry using uuid
@@ -28,7 +29,7 @@ const InputRow = ({ handlePost }: props) => {
             owner: owner,
             requestedService: requestedService,
             serviced: serviced,
-            arrival: arrival,
+            arrival: arrival?.format("YYYY-MM-DDTHH:mm:ssZ"),
         };
         // call handlePost function to add new entry to table
         handlePost(newEntry);
@@ -77,12 +78,7 @@ const InputRow = ({ handlePost }: props) => {
                 />
             </StyledTableCell>
             <StyledTableCell>
-                <DateTimePicker
-                    label="Arrival"
-                    value={arrival}
-                    onChange={setArrival}
-                    renderInput={(params) => <TextField {...params} />}
-                />
+                <DateTimePicker value={arrival} handleChange={setArrival} />
             </StyledTableCell>
             <StyledTableCell>
                 <Button variant="contained" color="primary" onClick={handleAdd}>
