@@ -18,7 +18,7 @@ export default function Home() {
                 <title>Puppy SPA</title>
                 <meta
                     name="description"
-                    content="Waiting List App, Puppy Spa a local puppy grooming store is looking for your help in building a waiting list management app. The purpose of this app is to help their receptionist manage the daily list of clients that bring their puppies to the spa each day."
+                    content="Waiting List App, Puppy Spa a local puppy grooming store's waiting list management app. The purpose of this app is to help their receptionist manage the daily list of clients that bring their puppies to the spa each day."
                 />
                 <link rel="icon" href="/puppyIcon.ico" />
             </Head>
