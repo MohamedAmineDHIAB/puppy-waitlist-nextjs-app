@@ -14,10 +14,15 @@ export default function post(item: any, Data: any[]) {
         });
     } else {
         const lastEntry = copyData[index].entries.slice(-1)[0];
-        item.prevEntryId = lastEntry.id;
-        lastEntry.nextEntryId = item.id;
+        if (lastEntry) {
+            item.prevEntryId = lastEntry.id;
+            lastEntry.nextEntryId = item.id;
+        } else {
+            item.prevEntryId = null;
+        }
         item.nextEntryId = null;
         copyData[index].entries.push(item);
     }
+    console.log(item.id);
     return copyData;
 }
