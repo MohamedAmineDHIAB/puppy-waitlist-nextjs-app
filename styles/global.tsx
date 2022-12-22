@@ -16,6 +16,9 @@ export const GlobalStyle = createGlobalStyle`
         letter-spacing: 0.05rem;
         font-size : 0.8rem;
     }
+    html {
+        overflow-x: hidden;
+    }
 `;
 
 export const Main = styled.div`
